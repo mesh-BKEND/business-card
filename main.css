@@ -31,6 +31,29 @@ body {
   color: var(--text);
   line-height: 1.6;
   background: var(--bg);
+  overflow-x: hidden;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+.section-container {
+  animation: scrolling 6s ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
+@keyframes scrolling {
+  from {
+    opacity: 0;
+    transform: scale(0) translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
 }
 
 /* Navigation section*/
@@ -38,7 +61,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   z-index: 1000;
   border-bottom: 1px solid var(--border);
@@ -56,8 +79,21 @@ nav {
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  animation: fadein 1.5s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .nav-items {
   margin-right: 30px;
@@ -71,11 +107,21 @@ nav {
 .nav-link {
   padding: 10px 15px;
   text-decoration: none;
-  color: var(--text-light);
+  color: var(--text);
   position: relative;
 }
-.nav-link:hover {
-  color: var(--accent);
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: greenyellow;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
 }
 
 /*hero-section*/
@@ -131,6 +177,36 @@ nav {
   margin-bottom: 2rem;
 }
 
+.one {
+  animation: slide-in 2s ease-in;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.two {
+  animation: slidefromright 2s ease-in;
+  animation-range: 0% cover 100%;
+}
+
+@keyframes slidefromright {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 .btn {
   display: inline-flex;
   align-items: center;
@@ -237,8 +313,21 @@ section {
   gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
+  animation: comeside 5s ease;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
 }
 
+@keyframes comeside {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 .about-header {
   text-align: center;
   display: flex;
@@ -360,6 +449,21 @@ section {
   flex-direction: column;
   gap: 3rem;
   position: relative;
+  animation: slideleft 5s ease;
+  animation-fill-mode: backwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
+
+@keyframes slideleft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .blog-header {
@@ -383,7 +487,7 @@ section {
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   max-width: 1200px;
   gap: 2rem;
   margin: 0 auto;
@@ -492,7 +596,7 @@ section {
 }
 
 .philosophy-card p {
-  max-width: 200px;
+  max-width: 240px;
 }
 
 .quote {
@@ -638,6 +742,22 @@ footer {
   text-align: center;
 }
 
+/* Large desktop screens */
+@media (min-width: 1400px) {
+  .hero-container,
+  .about-container,
+  .blog-container,
+  .container,
+  .footer-content,
+  .footer-bottom {
+    max-width: 1320px;
+  }
+
+  .hero-container h1 {
+    font-size: 4.5rem;
+  }
+}
+
 /* Large tablets and smaller desktops */
 @media (max-width: 1200px) {
   .nav-bar,
@@ -655,6 +775,10 @@ footer {
 
   .hero-container h1 {
     font-size: 3.5rem;
+  }
+
+  .profile-card {
+    padding: 2.5rem;
   }
 
   .about-grid,
@@ -681,6 +805,7 @@ footer {
   .nav-items {
     margin-right: 0;
     gap: 0.25rem;
+    justify-content: center;
   }
 
   .nav-link {
@@ -707,6 +832,16 @@ footer {
     justify-content: center;
   }
 
+  .profile-card {
+    margin: 0 auto;
+    max-width: 620px;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    padding: 0;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
     padding: 0 2rem;
@@ -715,6 +850,11 @@ footer {
   .about-content {
     padding: 0;
     text-align: center;
+  }
+
+  .skills {
+    gap: 0.5rem;
+    justify-content: center;
   }
 
   .about-visual {
@@ -742,6 +882,13 @@ footer {
     font-size: 2.5rem;
   }
 
+  .item .description,
+  .about-header p,
+  .blog-description,
+  .newsletter-header p {
+    max-width: 100%;
+  }
+
   .nav-bar,
   .footer-content {
     align-items: center;
@@ -756,6 +903,7 @@ footer {
   .nav-items {
     justify-content: center;
     margin-right: 0;
+    width: 100%;
   }
 
   .nav-link {
@@ -784,6 +932,7 @@ footer {
 
   .profile-card {
     padding: 2rem;
+    width: 100%;
   }
 
   .stats {
@@ -803,6 +952,10 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .philosophy-card p {
+    max-width: 100%;
+  }
+
   .blog-grid {
     padding: 0;
   }
@@ -817,6 +970,21 @@ footer {
 
   .newsletter-form {
     flex-direction: column;
+    max-width: 100%;
+  }
+}
+
+.contact-container {
+  animation: fadeout 4s ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
+@keyframes fadeout {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -912,6 +1080,10 @@ footer {
     padding: 1.25rem;
   }
 
+  .blog-meta {
+    margin: 0;
+  }
+
   .newsletter-form button,
   .newsletter-form input {
     width: 100%;
@@ -935,6 +1107,11 @@ footer {
 
   .hero-container h1 {
     font-size: 2rem;
+  }
+
+  .name {
+    font-size: 1.15rem;
+    text-align: center;
   }
 
   .profile-avatar {
