@@ -193,8 +193,8 @@ nav {
 }
 
 .two {
-  animation: slidefromright 2s ease-in;
-  animation-range: 0% cover 100%;
+  /* animation: slidefromright 2s ease-in;
+  animation-range: 0% cover 100%; */
 }
 
 @keyframes slidefromright {
@@ -314,8 +314,8 @@ section {
   max-width: 1200px;
   margin: 0 auto;
   animation: comeside 5s ease;
-  animation-timeline: view();
-  animation-range: entry 0% cover 50%;
+  /* animation-timeline: view();
+  animation-range: entry 0% cover 50%; */
 }
 
 @keyframes comeside {
