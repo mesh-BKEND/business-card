@@ -459,7 +459,7 @@ section {
 
 @keyframes slideleft {
   from {
-    transform: translateX(100%);
+    transform: translateX(70%);
     opacity: 0;
   }
   to {
