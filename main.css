@@ -60,7 +60,7 @@ video {
 nav {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   z-index: 1000;
@@ -742,6 +742,8 @@ footer {
   text-align: center;
 }
 
+/* responsiveness  */
+
 /* Large desktop screens */
 @media (min-width: 1400px) {
   .hero-container,
@@ -1096,6 +1098,9 @@ footer {
 
 /* Small phones */
 @media (max-width: 400px) {
+  .nav-bar {
+    width: 100%;
+  }
   .nav-link {
     font-size: 0.85rem;
     padding: 0.35rem 0.45rem;
